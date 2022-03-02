@@ -26,7 +26,7 @@ public class CommonController<E, S extends CommonService<E>> {
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getObject(@PathVariable Long id) {
 		Optional<E> optional = _service.findById(id);
-		if (optional.isEmpty()) {
+		if (!optional.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(optional.get());
